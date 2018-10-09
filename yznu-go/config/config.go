@@ -9,6 +9,7 @@ import (
 var (
 	ServerConf = &ServerConfig{}
 	MySqlConf  = &MySqlConfig{}
+	WxConf     = &WxConfig{}
 )
 
 type ServerConfig struct {
@@ -24,6 +25,11 @@ type MySqlConfig struct {
 	PassWd   string
 }
 
+type WxConfig struct {
+	AppId  string
+	Secret string
+}
+
 func init() {
 	cfg, err := ini.Load("conf/app.conf")
 	if err != nil {
@@ -36,5 +42,9 @@ func init() {
 	err = cfg.Section("mysql").MapTo(MySqlConf)
 	if err != nil {
 		log.Fatal("init mysql conf err:", err)
+	}
+	err = cfg.Section("weixin").MapTo(WxConf)
+	if err != nil {
+		log.Fatal("init weixin conf err:", err)
 	}
 }

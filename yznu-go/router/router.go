@@ -16,6 +16,7 @@ func Router() *gin.Engine {
 	apiv1 := r.Group("/api/v1")
 	{
 		apiv1.GET("/hello", controllers.HelloWorld)
+		apiv1.POST("/login", controllers.Login)
 	}
 	return r
 }
